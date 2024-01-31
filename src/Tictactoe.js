@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import './Tic.css';
 
-
-
-
 function Tictactoe() {
 
     const [turn,setturn]=useState('x');
@@ -20,12 +17,12 @@ function Tictactoe() {
     const checkforwinner=(square)=>{
 
         let combos={
-            across:[
+            horizontal:[
                 [0,1,2],
                 [3,4,5],
                 [6,7,8]
             ],
-            down:[
+            vertical:[
                 [0,3,6],
                 [1,4,7],
                 [2,5,8]
@@ -40,11 +37,7 @@ function Tictactoe() {
            
         combos[combo].forEach(pattern => {
             //console.log(pattern)
-            if(square[pattern[0]]===''||square[pattern[1]]===''||square[pattern[2]]==='')
-            {
-                //do nothing
-            }
-            else if(square[pattern[0]]===square[pattern[1]]&& 
+            if(square[pattern[0]]===square[pattern[1]]&& 
                 square[pattern[1]]===square[pattern[2]] )
             {
                 setwinner(square[pattern[0]]);
@@ -78,7 +71,7 @@ const handleclick=(num)=>
 }    
 
 //destructuring the object 
-const Cell=({num})=>
+const Col=({num})=>
 {
     return <td onClick={()=>handleclick(num)}>{cells[num]}</td>
 }
@@ -90,29 +83,29 @@ const Cell=({num})=>
             <tbody>
                 <tr>
                    
-                <Cell num={0}/>
-                <Cell num={1}/>
+                <Col num={0}/>
+                <Col num={1}/>
                 
-                <Cell num={2}/>
+                <Col num={2}/>
                 </tr>
                 <tr>
-                <Cell num={3}/>
-                <Cell num={4}/>
-                <Cell num={5}/>
+                <Col num={3}/>
+                <Col num={4}/>
+                <Col num={5}/>
                 </tr>
                 <tr>
-                <Cell num={6}/>
-                <Cell num={7}/>
-                <Cell num={8}/>
+                <Col num={6}/>
+                <Col num={7}/>
+                <Col num={8}/>
                 </tr>
             </tbody>
         </table>
         {winner &&(
             <>
             <p>{winner} is the winner</p>
-            <button onClick={()=>{reset()}}>play again</button>
-            </>
+           </>
         )}
+        <button onClick={()=>{reset()}}>play again</button>
     </div>
   )
 }
